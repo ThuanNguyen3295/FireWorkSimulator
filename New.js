@@ -2,20 +2,24 @@ var fireworks = [];
 var gravity;
 
 function setup(){
-  createCanvas(600,600);
+  createCanvas(500,300);
   gravity = createVector(0, 0.2);
-
   stroke(255);
   strokeWeight(4);
-
+  background(0); // trailing for the particles
 }
 function draw(){
-  background(51);
-  if(random(1) < 0.03) {
+  colorMode(RGB);
+  background(0, 0, 0, 25); // transition background
+  if(random(1) < 0.04) {
   fireworks.push(new Firework());
 }
-  for(var i = 0; i < fireworks.length; i++){
+  for(var i = fireworks.length -1; i >=0; i--){
     fireworks[i].update();
     fireworks[i].show();
+    if(fireworks[i].done()){
+        fireworks.splice(i,1);
+    }
   }
+  console.log(fireworks.length);
 }
